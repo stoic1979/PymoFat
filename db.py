@@ -1,5 +1,3 @@
-
-
 from pymongo import MongoClient
 from config import *
 import traceback
@@ -82,6 +80,21 @@ class Mdb:
 #            get_all_pending_todo               #
 #                                               #
 #################################################
+    def get_all_pending(self):
+        ret = []
+        collection = self.db["todo"]
+        result = collection.find({"done": "0"})
+        if not result:
+            not_done = collection.find()
+            for data in not_done:
+                print "<<=====got the data====>> :: %s" % data
+                ret.append(data)
+            return JSONEncoder().encode({'todo': ret})
+
+        for data in result:
+            print "<<=====got the data====>> :: %s" % data
+            ret.append(data)
+        return JSONEncoder().encode({'todo': ret})
 
 
 #################################################
@@ -89,6 +102,21 @@ class Mdb:
 #             get_all_done_todo                 #
 #                                               #
 #################################################
+    def get_all_done(self):
+        ret = []
+        collection = self.db["todo"]
+        result = collection.find({"done": "1"})
+        if not result:
+            not_done = collection.find()
+            for data in not_done:
+                print "<<=====got the data====>> :: %s" % data
+                ret.append(data)
+            return JSONEncoder().encode({'todo': ret})
+
+        for data in result:
+            print "<<=====got the data====>> :: %s" % data
+            ret.append(data)
+        return JSONEncoder().encode({'todo': ret})
 
 
 if __name__ == "__main__":
