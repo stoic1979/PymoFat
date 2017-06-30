@@ -60,11 +60,20 @@ def delete_todo():
         print(traceback.format_exc())
     return "%s" % mdb.delete_todo(title)
 
+
 #################################################
 #                                               #
 #            get_all_pending_todo               #
 #                                               #
 #################################################
+@app.route("/get_all_pending", methods=['GET'])
+def get_all_pending():
+    try:
+        mdb.get_all_pending()
+    except Exception as exp:
+        print "get_done() :: Got exception: %s" % exp
+        print(traceback.format_exc())
+    return "%s" % mdb.get_all_pending()
 
 
 #################################################
@@ -72,6 +81,14 @@ def delete_todo():
 #             get_all_done_todo                 #
 #                                               #
 #################################################
+@app.route("/get_all_done", methods=['GET'])
+def get_all_done():
+    try:
+        mdb.get_all_done()
+    except Exception as exp:
+        print "get_done() :: Got exception: %s" % exp
+        print(traceback.format_exc())
+    return "%s" % mdb.get_all_done()
 
 
 #################################################
