@@ -1,23 +1,31 @@
-function TodoCtrl($scope) {
-  
-  $scope.todos = [
-    {text:'Learn AngularJS', done:false},         
-    {text: 'Build an app', done:false}
-  ];
-  
-  $scope.getTotalTodos = function () {
-    return $scope.todos.length;
-  };
-  
-  
-  $scope.addTodo = function () {
-    $scope.todos.push({text:$scope.formTodoText, done:false});
-    $scope.formTodoText = '';
-  };
-  
-    $scope.clearCompleted = function () {
-        $scope.todos = _.filter($scope.todos, function(todo){
-            return !todo.done;
+function myFunction() {
+    var x = document.getElementById('myDIV');
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+    } else {
+        x.style.display = 'none';
+    }
+}
+
+
+var app = angular.module('myApp', []); 
+app.controller('todoCtrl', function($scope) 
+{
+    $scope.todoList = [{ text:'day work ',done: false }
+        ];
+
+    $scope.todoAdd = function() 
+    {
+        alert("PLEASE ENTER ...SAVE TODO");
+        $scope.todoList.push({text:$scope.todoInput, done:false});
+        $scope.todoInput = "";
+    };
+
+    $scope.remove = function() {
+        var oldList = $scope.todoList;
+        $scope.todoList = [];
+        angular.forEach(oldList, function(x) {
+            if (!x.done) $scope.todoList.push(x);
         });
     };
-}
+});
